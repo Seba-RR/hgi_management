@@ -82,10 +82,11 @@ def register(request):
         data = json.loads(request.body)
     except JSONDecodeError as error:
         return JsonResponse({"status_text": "Request error","error": str(error),},status=400,)
-    token = request.headers["Authorization"]
-    user = get_user_from_usertoken(token)
-    if user.company is not None:
-        data['company'] = user.company.id
+    
+    #token = request.headers["Authorization"]
+    #user = get_user_from_usertoken(token)
+    #if user.company is not None:
+        #data['company'] = user.company.id
     data["email"] = data["email"].lower()
     serializer = CreateUserSerializer(data=data)
     if serializer.is_valid():
